@@ -32,7 +32,10 @@ plugins = Object.values(plugins).map((plugin) => plugin.config);
 const { init } = require("./handlers/init.js");
 
 const log = new (require("cat-loggr"))();
+const onHeaders = require("on-headers");
 
+// Trust the preview reverse proxy so req.secure / X-Forwarded-Proto are correct.
+app.set("trust proxy", 1);
 
 app.use(
   session({
@@ -48,6 +51,23 @@ app.use(
     saveUninitialized: true,
   }),
 );
+
+// Make the session cookie work inside the HTTPS live-preview iframe
+// (SameSite=None + Secure) while staying usable over plain HTTP locally.
+// Applied at header-write time because passport regenerates the session
+// (and resets the cookie object) during login.
+app.use((req, res, next) => {
+  onHeaders(res, () => {
+    if (req.session && req.session.cookie) {
+      const fwd = req.get("x-forwarded-proto");
+      const https =
+        req.secure || (fwd ? fwd.split(",")[0].trim() === "https" : false);
+      req.session.cookie.secure = https;
+      req.session.cookie.sameSite = https ? "none" : "lax";
+    }
+  });
+  next();
+});
 
 
 /**
