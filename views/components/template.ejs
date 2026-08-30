@@ -21,17 +21,17 @@
 
     <style>
         :root {
-            --header-bg: rgba(23, 23, 23, 0.9);
-            --header-active: rgba(79, 70, 229, 0.2);
-            --header-hover: rgba(255, 255, 255, 0.05);
-            --header-text: rgba(255, 255, 255, 0.8);
-            --header-text-active: rgba(255, 255, 255, 0.95);
+            --header-bg: rgba(10, 16, 26, 0.55);
+            --header-active: rgba(56, 189, 248, 0.22);
+            --header-hover: rgba(255, 255, 255, 0.06);
+            --header-text: rgba(255, 255, 255, 0.9);
+            --header-text-active: #ffffff;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #171717;
-            color: rgba(255, 255, 255, 0.8);
+            background-color: transparent;
+            color: #ffffff;
             padding-top: 64px; /* Space for the fixed header */
         }
 
@@ -218,6 +218,8 @@
             gap: 12px;
         }
     </style>
+    <!-- PHB theme: background image + glass surfaces + white text + light blue -->
+    <link rel="stylesheet" href="/assets/phb-theme.css">
 </head>
 
 <body x-data="{ 

@@ -1,10 +1,10 @@
 {
-  "name": "TeryxPanel",
+  "name": "PHB",
   "version": "4.0",
-  "description": "TeryxPanel is an open source panel for managing and operating game servers and applications built using Node.js with Express and Dockerode.",
+  "description": "PHB is an open source panel for managing and operating game servers and applications built using Node.js with Express and Dockerode.",
   "main": "index.js",
   "bin": {
-    "TeryxPanel": "./exec/bin/index.js"
+    "PHB": "./exec/bin/index.js"
   },
   "scripts": {
     "start": "node index.js",

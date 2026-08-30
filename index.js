@@ -1,5 +1,5 @@
 /*
- *  Teryx Panel 4.0
+ *  PHB 4.0
  *  (c) 2025 Hopingboyz
  *
  */
@@ -228,12 +228,12 @@ init();
 
 console.log(chalk.gray(ascii) + chalk.white(`version v${config.version}\n`));
 app.listen(config.port, () =>
-  log.info(`TeryxPanel is listening on port ${config.port}`),
+  log.info(`PHB is listening on port ${config.port}`),
 );
 
 app.get("*", async function (req, res) {
   res.render("errors/404", {
     req,
-    name: (await db.get("name")) || "TeryxPanel",
+    name: (await db.get("name")) || "PHB",
   });
 });

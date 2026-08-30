@@ -122,7 +122,7 @@ router.get("/instances", isAuthenticated, async (req, res) => {
         res.render("instances", {
             req,
             user: req.user,
-            name: (await db.get("name")) || "TeryxPanel",
+            name: (await db.get("name")) || "PHB",
             logo: (await db.get("logo")) || false,
             instances,
             config: require("../../config.json"),
@@ -132,7 +132,7 @@ router.get("/instances", isAuthenticated, async (req, res) => {
         res.status(500).render("error", {
             error: "Internal Server Error",
             user: req.user,
-            name: (await db.get("name")) || "TeryxPanel",
+            name: (await db.get("name")) || "PHB",
             logo: (await db.get("logo")) || false,
         });
     }
@@ -157,7 +157,7 @@ router.get("/instance/:id", isAuthenticated, async (req, res) => {
             return res.status(403).render("error", {
                 error: "Unauthorized access to this instance",
                 user: req.user,
-                name: (await db.get("name")) || "TeryxPanel",
+                name: (await db.get("name")) || "PHB",
                 logo: (await db.get("logo")) || false,
             });
         }
@@ -212,7 +212,7 @@ router.get("/instance/:id", isAuthenticated, async (req, res) => {
         res.status(500).render("error", {
             error: "Internal Server Error",
             user: req.user,
-            name: (await db.get("name")) || "TeryxPanel",
+            name: (await db.get("name")) || "PHB",
             logo: (await db.get("logo")) || false,
         });
     }
@@ -235,7 +235,7 @@ router.get("/instance/:id/installing", isAuthenticated, async (req, res) => {
             return res.status(403).render("error", {
                 error: "Unauthorized access to this instance",
                 user: req.user,
-                name: (await db.get("name")) || "TeryxPanel",
+                name: (await db.get("name")) || "PHB",
                 logo: (await db.get("logo")) || false,
             });
         }
@@ -251,7 +251,7 @@ router.get("/instance/:id/installing", isAuthenticated, async (req, res) => {
             req,
             instance,
             user: req.user,
-            name: (await db.get("name")) || "TeryxPanel",
+            name: (await db.get("name")) || "PHB",
             logo: (await db.get("logo")) || false,
             config: require("../../config.json"),
         });
@@ -260,7 +260,7 @@ router.get("/instance/:id/installing", isAuthenticated, async (req, res) => {
         res.status(500).render("error", {
             error: "Internal Server Error",
             user: req.user,
-            name: (await db.get("name")) || "TeryxPanel",
+            name: (await db.get("name")) || "PHB",
             logo: (await db.get("logo")) || false,
         });
     }

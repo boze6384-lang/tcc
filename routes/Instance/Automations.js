@@ -127,7 +127,7 @@ router.get("/instance/:id/automations", async (req, res) => {
             port,
             domain,
             user: req.user,
-            name: (await db.get("name")) || "TeryxPanel",
+            name: (await db.get("name")) || "PHB",
             logo: (await db.get("logo")) || false,
             files,
             addons: {
@@ -139,7 +139,7 @@ router.get("/instance/:id/automations", async (req, res) => {
         res.status(500).render("error", {
             error: "Internal Server Error",
             user: req.user,
-            name: (await db.get("name")) || "TeryxPanel",
+            name: (await db.get("name")) || "PHB",
             logo: (await db.get("logo")) || false,
         });
     }

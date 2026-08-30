@@ -1,0 +1,204 @@
+/* ============================================================================
+   PHB PANEL THEME
+   ----------------------------------------------------------------------------
+   Glassmorphism theme: image background + white text + light blue accent.
+
+   >>> BACKGROUND IMAGE <<<
+   Drop your image at:  public/assets/phb-bg.png
+   (any size; it is stretched to cover, fixed while scrolling).
+   If the file is missing the dark blue gradient fallback below is used, so the
+   panel never looks broken.
+
+   All tokens are CSS variables on :root — change the colour/blur here and the
+   whole panel follows.
+   ========================================================================== */
+
+:root {
+  /* Background image (replace the file, no code change needed) */
+  --phb-bg-image: url("/assets/phb-bg.png");
+
+  /* Fallback shown while the image is missing */
+  --phb-bg-fallback: linear-gradient(160deg, #0b1e33 0%, #0a1424 45%, #071322 100%);
+
+  /* Dark scrim painted over the image so white text stays readable.
+     Raise the alpha values if your image is bright. */
+  --phb-scrim: linear-gradient(
+    180deg,
+    rgba(5, 10, 20, 0.62) 0%,
+    rgba(5, 10, 20, 0.74) 55%,
+    rgba(5, 10, 20, 0.82) 100%
+  );
+
+  /* Translucent "glass" surfaces */
+  --phb-glass: rgba(255, 255, 255, 0.07);
+  --phb-glass-strong: rgba(255, 255, 255, 0.11);
+  --phb-glass-border: rgba(255, 255, 255, 0.14);
+  --phb-blur: 14px;
+
+  /* Light blue accent */
+  --phb-accent: #38bdf8;        /* sky-400 */
+  --phb-accent-strong: #0ea5e9; /* sky-500, buttons */
+  --phb-accent-dark: #0369a1;   /* sky-700, hover   */
+  --phb-accent-text: #7dd3fc;   /* sky-300, links   */
+
+  /* White text scale */
+  --phb-text: #ffffff;
+  --phb-text-soft: rgba(255, 255, 255, 0.88);
+  --phb-text-mute: rgba(255, 255, 255, 0.68);
+}
+
+/* --------------------------------------------------------------------------
+   1. Background image layer (fixed, behind everything)
+   -------------------------------------------------------------------------- */
+html {
+  background-color: #05070d !important;
+}
+
+body {
+  color: var(--phb-text) !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  /* image on top of the gradient: if the png is absent the gradient shows */
+  background-image: var(--phb-bg-image), var(--phb-bg-fallback);
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--phb-scrim);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   2. White text
+   -------------------------------------------------------------------------- */
+body,
+p, li, td, th, label, span, div, h1, h2, h3, h4, h5, h6 {
+  color: inherit;
+}
+
+.text-white,
+.text-gray-100, .text-gray-200, .text-gray-300,
+.text-neutral-100, .text-neutral-200, .text-neutral-300,
+.text-zinc-100, .text-zinc-200, .text-zinc-300,
+.text-slate-100, .text-slate-200, .text-slate-300 {
+  color: var(--phb-text) !important;
+}
+
+.text-gray-400, .text-neutral-400, .text-zinc-400, .text-slate-400 {
+  color: var(--phb-text-soft) !important;
+}
+
+.text-gray-500, .text-neutral-500, .text-zinc-500, .text-slate-500 {
+  color: var(--phb-text-mute) !important;
+}
+
+::placeholder {
+  color: var(--phb-text-mute) !important;
+  opacity: 1;
+}
+
+::selection {
+  background: rgba(56, 189, 248, 0.35);
+  color: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   3. Translucent (glass) surfaces
+   Every dark card / panel / sidebar in the panel uses one of these shades.
+   -------------------------------------------------------------------------- */
+[class*="bg-gray-800"], [class*="bg-gray-900"],
+[class*="bg-neutral-800"], [class*="bg-neutral-900"],
+[class*="bg-zinc-800"], [class*="bg-zinc-900"],
+[class*="bg-slate-800"], [class*="bg-slate-900"],
+[class*="bg-black/"], [class*="bg-white/"] {
+  background-color: var(--phb-glass) !important;
+  backdrop-filter: blur(var(--phb-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--phb-blur)) saturate(140%);
+}
+
+[class*="border-gray-7"], [class*="border-gray-8"],
+[class*="border-neutral-7"], [class*="border-neutral-8"],
+[class*="border-zinc-7"], [class*="border-zinc-8"],
+[class*="border-white/"], [class*="border-black/"] {
+  border-color: var(--phb-glass-border) !important;
+}
+
+/* Handy explicit class for new markup */
+.phb-glass {
+  background-color: var(--phb-glass) !important;
+  backdrop-filter: blur(var(--phb-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--phb-blur)) saturate(140%);
+  border: 1px solid var(--phb-glass-border);
+}
+
+.phb-glass-strong {
+  background-color: var(--phb-glass-strong) !important;
+  backdrop-filter: blur(var(--phb-blur)) saturate(150%);
+  -webkit-backdrop-filter: blur(var(--phb-blur)) saturate(150%);
+  border: 1px solid var(--phb-glass-border);
+}
+
+/* --------------------------------------------------------------------------
+   4. Light blue accent (replaces the stock indigo)
+   -------------------------------------------------------------------------- */
+a:hover {
+  color: var(--phb-accent-text) !important;
+}
+
+.bg-indigo-500 { background-color: var(--phb-accent) !important; }
+.bg-indigo-600 { background-color: var(--phb-accent-strong) !important; }
+.hover\:bg-indigo-600:hover,
+.hover\:bg-indigo-700:hover { background-color: var(--phb-accent-dark) !important; }
+
+.text-indigo-300, .text-indigo-400, .text-indigo-500, .text-indigo-600 {
+  color: var(--phb-accent-text) !important;
+}
+
+.border-indigo-500, .border-indigo-600 { border-color: var(--phb-accent) !important; }
+.ring-indigo-500 { --tw-ring-color: var(--phb-accent) !important; }
+
+/* focus rings */
+.focus\:ring-indigo-500:focus { --tw-ring-color: var(--phb-accent) !important; }
+.focus\:border-indigo-500:focus { border-color: var(--phb-accent) !important; }
+
+/* inputs sit on glass too */
+input, select, textarea {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  color: var(--phb-text) !important;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--phb-accent) !important;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.45) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. Scrollbars
+   -------------------------------------------------------------------------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 189, 248, 0.45) transparent;
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.35);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover { background: rgba(56, 189, 248, 0.6); background-clip: content-box; }

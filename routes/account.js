@@ -31,7 +31,7 @@ router.get("/account", async (req, res) => {
         req,
         user: req.user,
         users: (await db.get("users")) || [],
-        name: (await db.get("name")) || "TeryxPanel",
+        name: (await db.get("name")) || "PHB",
         logo: (await db.get("logo")) || false,
     });
 });
@@ -123,7 +123,7 @@ router.get("/enable-2fa", async (req, res) => {
         const secret = speakeasy.generateSecret({
             length: 20,
             name: `HydraPanel (${currentUser.username})`,
-            issuer: "TeryxPanel",
+            issuer: "PHB",
         });
 
         const updatedUsers = users.map((user) => {
@@ -145,7 +145,7 @@ router.get("/enable-2fa", async (req, res) => {
                 req,
                 user: req.user,
                 users,
-                name: (await db.get("name")) || "TeryxPanel",
+                name: (await db.get("name")) || "PHB",
                 logo: (await db.get("logo")) || false,
                 qrCode: data_url,
             });

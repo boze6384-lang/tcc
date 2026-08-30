@@ -259,7 +259,7 @@ router.get("/2fa", async (req, res) => {
   }
   res.render("auth/2fa", {
     req,
-    name: (await db.get("name")) || "TeryxPanel",
+    name: (await db.get("name")) || "PHB",
     logo: (await db.get("logo")) || false,
   });
 });
@@ -325,7 +325,7 @@ router.get("/resend-verification", async (req, res) => {
   try {
     res.render("auth/resend-verification", {
       req,
-      name: (await db.get("name")) || "TeryxPanel",
+      name: (await db.get("name")) || "PHB",
       logo: (await db.get("logo")) || false,
     });
   } catch (error) {
@@ -381,7 +381,7 @@ async function initializeRoutes() {
               res.render("auth/register", {
                 req,
                 user: req.user,
-                name: (await db.get("name")) || "TeryxPanel",
+                name: (await db.get("name")) || "PHB",
                 logo: (await db.get("logo")) || false,
               });
             } catch (error) {
@@ -443,7 +443,7 @@ router.get("/auth/reset-password", async (req, res) => {
   try {
     res.render("auth/reset-password", {
       req,
-      name: (await db.get("name")) || "TeryxPanel",
+      name: (await db.get("name")) || "PHB",
       logo: (await db.get("logo")) || false,
     });
   } catch (error) {
@@ -491,7 +491,7 @@ router.get("/auth/reset/:token", async (req, res) => {
 
     res.render("auth/password-reset-form", {
       req,
-      name: (await db.get("name")) || "TeryxPanel",
+      name: (await db.get("name")) || "PHB",
       logo: (await db.get("logo")) || false,
       token: token,
     });

@@ -62,7 +62,7 @@ router.get("/instance/:id/archives", async (req, res) => {
                     req,
                     user: req.user,
                     instance,
-                    name: await db.get('name') || 'TeryxPanel',
+                    name: await db.get('name') || 'PHB',
                     logo: await db.get('logo') || false,
                     archives,
                     settings,

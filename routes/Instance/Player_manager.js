@@ -48,7 +48,7 @@ router.get("/instance/:id/player", async (req, res) => {
     res.render("instance/player", {
         req,
         user: req.user,
-        name: (await db.get("name")) || "TeryxPanel",
+        name: (await db.get("name")) || "PHB",
         logo: (await db.get("logo")) || false,
         instance,
         addons: {
